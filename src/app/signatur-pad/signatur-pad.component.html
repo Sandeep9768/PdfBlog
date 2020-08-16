@@ -1,0 +1,50 @@
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-item>
+    <ion-label>
+      name
+    </ion-label>
+    <ion-input [(ngModel)]="rowData.name"></ion-input>
+  </ion-item>
+  <img [src]="photoPreview" *ngIf="photoPreview">
+  <ion-button expand='full' (click)="takePicture()">Add Picture</ion-button>
+  <div class="title">Please draw your Signature</div>
+  <ion-row [ngClass]="{'drawing-active': isDrawing}">
+    <ion-col></ion-col>
+    <ion-col>
+      <signature-pad #signatureCanvas [options] = "signaturePadOptions" id = "signatureCanvas" (onBeginEvent) = "drawStart ()" (onEndEvent) = "drawComplete ()"> </signature-pad>
+    </ion-col>
+    <ion-col></ion-col>
+ 
+  </ion-row>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col width-80>
+      <img [src]="rowData.signature"/>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button ion-button full color="danger" (click)="clearPad()">Clear</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button ion-button full color="secondary" (click)="savePad()">Save</ion-button>
+    </ion-col>
+  </ion-row>
+  
+ 
+  <ion-button expand='full' (click)="downloadPdf()">Download Pdf</ion-button>
+  <ion-button expand='full' (click)="createPdf()">Create Pdf</ion-button>
+  
+  
+</ion-content>
